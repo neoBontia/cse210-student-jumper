@@ -1,6 +1,6 @@
-import jumper
-from .... import checker
-from ...... import state
+from game.jumper import Jumper
+from game.checker import Checker
+from game.state import State
 
 
 class director:
@@ -9,9 +9,6 @@ class director:
     this class of objects is to control the sequence of play.
     
     Stereotype: Coordinator
-       
-        
-        
         """
     def __init__(self):
         """The class constructor.
@@ -19,9 +16,9 @@ class director:
         Args:
             self (Director): an instance of Director.
         """
-        self.jumper = jumper()
-        self.checker = checker()
-        self.state = state()
+        self.jumper = Jumper()
+        self.checker = Checker("test")
+        self.state = State()
 
 
     def start_game(self):
@@ -30,10 +27,11 @@ class director:
         Args:
             gets update from jumper
         """
-        while jumper.getlives:
+        self.state.draw()
+        while self.jumper.getLives() > 0:
             self.get_inputs()
             self.updates()
-            self.displayOutputs()
+            self.displayOutput()
 
 
     def get_inputs(self):
@@ -42,12 +40,12 @@ class director:
         Args:
             self (Director): An instance of Director.
         """
-        jumper.guessALetter()
+        self.jumper.guessALetter()
 
     def updates (self):
-        checker.checkAnswer(jumper.getGuess)
-        jumper.updateLives(checker.isCorrect)
-        state.updateStatus(jumper.getLives, checker.getHint)
+        self.checker.checkAnswer(self.jumper.getGuess())
+        self.jumper.updateLives(self.checker.isCorrect())
+        self.state.updateStatus(self.jumper.getLives, self.checker.get_hint())
     
-    def displatOutput(self):
-        state.draw()
+    def displayOutput(self):
+        self.state.draw()
