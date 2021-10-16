@@ -15,7 +15,7 @@ class Jumper:
             self (Jumper): An instance of the Jumper class
         """
         self.guess = ""
-        self.lives = 3
+        self.lives = 4
 
     def guessALetter(self):
         """Method in charge of prompting the jumper which letter they will
