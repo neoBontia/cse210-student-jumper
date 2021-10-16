@@ -27,7 +27,6 @@ class State:
             currHint(list of char): Current state of hints the player has
         """
         self.lives = currLife
-        self.hint.clear()
         self.hint = currHint
 
     def draw(self):

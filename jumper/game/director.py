@@ -1,7 +1,7 @@
 from game.jumper import Jumper
 from game.checker import Checker
 from game.state import State
-
+import random
 
 class director:
 
@@ -16,8 +16,9 @@ class director:
         Args:
             self (Director): an instance of Director.
         """
+        self.listOfWords = ["happy", "computer", "family", "gospel", "internet", "love"]
         self.jumper = Jumper()
-        self.checker = Checker("test")
+        self.checker = Checker(random.choice(self.listOfWords))
         self.state = State(self.checker.get_hint())
 
 
@@ -28,7 +29,7 @@ class director:
             gets update from jumper
         """
         self.state.draw()
-        while self.jumper.getLives() > 0:
+        while self.jumper.getLives() > 0 and not self.checker.isFinished():
             self.get_inputs()
             self.updates()
             self.displayOutput()
@@ -45,7 +46,7 @@ class director:
     def updates (self):
         self.checker.checkAnswer(self.jumper.getGuess())
         self.jumper.updateLives(self.checker.isCorrect())
-        self.state.updateStatus(self.jumper.getLives, self.checker.get_hint())
+        self.state.updateStatus(self.jumper.getLives(), self.checker.get_hint())
     
     def displayOutput(self):
         self.state.draw()
