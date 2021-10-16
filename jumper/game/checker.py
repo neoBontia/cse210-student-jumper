@@ -21,28 +21,40 @@ class Checker:
           word (string): a new word
           """
         self.word = word.lower()
-        self.hint = [] * len(self.word)
+        self.hint = []
+        for _ in self.word:
+            self.hint.append("_")
         self.correct = True
+        self.finished = False
 
     def checkAnswer(self, char):
-        i = 0
-        flag = False
+        splitWord = self.Convert(self.word)
 
-        for c in self.word:
-            if (c == char.lower()):
-                self.hint[i] = c
-                flag = True
-            i = i + 1
+        if char in splitWord:
+            self.correct = True
+
+            for i in range(len(self.word)):
+                if splitWord[i] == char:
+                    self.hint[i] = char
+        else:
+            self.correct = False
+
+        self.checkFinished()
+
+    def checkFinished(self):
+        if not "_" in self.hint:
+            self.finished = True
+
+    def isFinished(self):
+        return self.finished
 
     def get_hint(self):
-        message = ""
-        i = 0
-        for c in self.word:
-            if (c == self.hint[i]):
-                message = message + c + " "
-            else:
-                message = message + "_ "
-        return message
+        return self.hint
 
     def isCorrect(self):
         return self.correct
+
+    def Convert(self, string):
+        list1 = []
+        list1[:0] = string
+        return list1

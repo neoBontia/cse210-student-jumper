@@ -8,13 +8,14 @@ class State:
         hint (list of char): the hint that will be displayed in the game
         lives (number): how many lives the jumper still has
     """
-    def __init__(self):
+    def __init__(self, key):
         """Constructor of the State class
 
         Args:
             self (State): An instance of the State class
         """
         self.hint = []
+        self.hint = key
         self.lives = 4
 
     def updateStatus(self, currLife, currHint):
@@ -26,7 +27,6 @@ class State:
             currHint(list of char): Current state of hints the player has
         """
         self.lives = currLife
-        self.hint.clear()
         self.hint = currHint
 
     def draw(self):
