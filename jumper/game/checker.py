@@ -3,10 +3,8 @@ class Checker:
     responsibility of this class of objects is to receive a word-to-guess from the 
     game director, checks the guess from the jumper, and provide a hint for every 
     guess made by the jumper.
-
     Stereotype:
         Information Holder, Service Provider
-
     Attributes:
         word (string): The word that jumper should guess.
         hint (list): The list of character.
@@ -15,19 +13,17 @@ class Checker:
 
     def __init__(self, word):
         """Class constructor. Declares and initializes instance attributes.
-
         Args:
           self (Checker): An instance of Checker.
           word (string): a new word
           """
         self.word = word.lower()
-        self.hint = [] * len(self.word)
+        self.hint = ["_ "] * len(word)
         self.correct = True
 
     def checkAnswer(self, char):
         i = 0
         flag = False
-
         for c in self.word:
             if (c == char.lower()):
                 self.hint[i] = c
@@ -38,6 +34,8 @@ class Checker:
         message = ""
         i = 0
         for c in self.word:
+            if (self.hint == []):
+                message = message + "_ "
             if (c == self.hint[i]):
                 message = message + c + " "
             else:
