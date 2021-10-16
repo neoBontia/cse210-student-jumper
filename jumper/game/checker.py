@@ -21,7 +21,7 @@ class Checker:
           word (string): a new word
           """
         self.word = word.lower()
-        self.hint = []
+        self.hint = [] * len(self.word)
         self.correct = True
 
     def checkAnswer(self, char):
