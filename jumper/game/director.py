@@ -18,7 +18,7 @@ class director:
         """
         self.jumper = Jumper()
         self.checker = Checker("test")
-        self.state = State()
+        self.state = State(self.checker.get_hint())
 
 
     def start_game(self):

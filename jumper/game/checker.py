@@ -21,7 +21,9 @@ class Checker:
           word (string): a new word
           """
         self.word = word.lower()
-        self.hint = [] * len(self.word)
+        self.hint = []
+        for _ in self.word:
+            self.hint.append("_")
         self.correct = True
 
     def checkAnswer(self, char):
@@ -35,14 +37,7 @@ class Checker:
             i = i + 1
 
     def get_hint(self):
-        message = ""
-        i = 0
-        for c in self.word:
-            if (c == self.hint[i]):
-                message = message + c + " "
-            else:
-                message = message + "_ "
-        return message
+        return self.hint
 
     def isCorrect(self):
         return self.correct
