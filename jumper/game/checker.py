@@ -27,6 +27,7 @@ class Checker:
     def checkAnswer(self, char):
         i = 0
         flag = False
+
         for c in self.word:
             if (c == char.lower()):
                 self.hint[i] = c
